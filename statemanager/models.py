@@ -48,12 +48,12 @@ class ActionStatePath(models.Model):
     action = models.ForeignKey(action, on_delete=models.CASCADE, blank=True, null=True, related_name='action')
 
     @property
-    def selected_user_state(self):
+    def current_state(self):
         return self.user.state.name
 
     def save(self, *args, **kwargs):
        if self.user and hasattr(self.user, 'state'):
-           self._selected_user_state = self.user.state.name
+           self._current_state = self.user.state.name
        super().save(*args, **kwargs)
 
     def __str__(self):
