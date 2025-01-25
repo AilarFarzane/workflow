@@ -3,4 +3,4 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    state = models.ForeignKey('statemanager.state', on_delete=models.CASCADE, null=True, blank=True)
+    current_state = models.ForeignKey('statemanager.State', on_delete=models.CASCADE, null=True, blank=True)

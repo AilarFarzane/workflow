@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class state(models.Model):
+class State(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     slug = models.SlugField(max_length=100, unique=True)
@@ -24,9 +24,9 @@ class state(models.Model):
 
 
 
-class action(models.Model):
-    starting_state = models.ForeignKey(state, on_delete=models.CASCADE, related_name='starting_state')
-    ending_state = models.ForeignKey(state, on_delete=models.CASCADE, related_name='ending_state')
+class Action(models.Model):
+    starting_state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='starting_state')
+    ending_state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='ending_state')
     name = models.CharField(max_length=100)
     description = models.TextField()
     slug  = models.SlugField(max_length=100, unique=True)
@@ -45,7 +45,7 @@ class action(models.Model):
 
 class ActionStatePath(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    action = models.ForeignKey(action, on_delete=models.CASCADE, blank=True, null=True, related_name='action')
+    action = models.ForeignKey(Action, on_delete=models.CASCADE, blank=True, null=True, related_name='action')
 
     @property
     def current_state(self):

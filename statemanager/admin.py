@@ -1,16 +1,16 @@
 from django.contrib import admin
-from .models import state, action, ActionStatePath
+from .models import State, Action, ActionStatePath
 
 
 class stateAdmin(admin.ModelAdmin):
-    model = state
+    model = State
 
     list_display = ['name', 'description' , 'color']
 
 
 class actionAdmin(admin.ModelAdmin):
-    model = action
-    list_display = ['name', 'starting_state', 'ending_state', 'description', 'color']
+    model = Action
+    list_display = ['id','name', 'starting_state', 'ending_state', 'description', 'color']
 
 
 class ActionStatePathAdmin(admin.ModelAdmin):
@@ -24,6 +24,6 @@ class ActionStatePathAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(state, stateAdmin)
-admin.site.register(action, actionAdmin)
+admin.site.register(State, stateAdmin)
+admin.site.register(Action, actionAdmin)
 admin.site.register(ActionStatePath, ActionStatePathAdmin)

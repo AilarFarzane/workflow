@@ -6,10 +6,10 @@ from .models import CustomUser
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ['username', 'state', 'is_staff']
+    list_display = ['username', 'current_state', 'is_staff']
     fieldsets = (
-        ('Personal info', {'fields': ['username']}),
-        ('state', {'fields': ['state']}),
+        ('Personal info', {'fields': ['username', 'password']}),
+        ('state', {'fields': ['current_state']}),
     )
 
 

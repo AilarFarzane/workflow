@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Manage User State</h1>
+
+        <div class="mb-4">
+            <h3>User Details</h3>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Current State:</strong> 
+                <span class="badge" style="background-color: {{ current_state.color }}">{{ current_state.name }}</span>
+            </p>
+        </div>
+
+        {% if actions %}
+        <h3>Available Actions</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="action" class="form-label">Choose an Action:</label>
+                <select name="action" id="action" class="form-select">
+                    {% for action in actions %}
+                    <option value="{{ action.id }}">{{ action.name }} (-> {{ action.ending_state.name }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Perform Action</button>
+        </form>
+        {% else %}
+        <p class="text-muted">No applicable actions available for the current state.</p>
+        {% endif %}
+
+        <a href="{% url 'user-list' %}" class="btn btn-secondary mt-3">Back to User List</a>
+    </div>
+{% endblock %}
