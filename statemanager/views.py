@@ -26,28 +26,26 @@ def UserApplyAction(request, user_id):
         action_id = request.POST.get('action')
 
         # print(action_id)
-        if action_id:
-            action = get_object_or_404(Action, pk=action_id)
-            user.current_state = action.ending_state
 
-            user_path = ActionStatePath.objects.create(
+        action = get_object_or_404(Action, pk=action_id)
+        user.current_state = action.ending_state
+
+        user_path = ActionStatePath.objects.create(
                 user=user,
 
                 action=action,
                 )
-            print(user_path)
+        print(user_path)
 
-            user.save()
+        user.save()
 
-            return redirect('user-actions', user_id=user_id)
+        return redirect('user-actions', user_id=user_id)
 
     return render(request, 'user_actions.html', context={
         'actions':actions,
         'user':user,
         'current_state':current_state
     })
-
-
 
 
 def user_action_tree_view(request, user_id):

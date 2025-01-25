@@ -36,7 +36,8 @@ def generate_user_action_graph(user_id):
         ))
 
     # Output the graph as a PNG file
-    output_path = os.path.abspath( f"user_{user_id}_action_graph.png")
+    folder_path = os.path.abspath("graphs")
+    output_path = os.path.join(folder_path, f"user_{user_id}_action_graph.png")
     graph.write_png(output_path)
 
     print(f"Graph saved to {output_path}")
